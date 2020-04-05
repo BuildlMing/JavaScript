@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .button {
+            margin: auto;
+            padding: 20px;
+        }
+
+        .image {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="button ">
+                <button id="btn-iPad" type="button" onclick="iPad()">iPad</button>
+                <button id="btn-iPadAir" type="button" onclick="iPadAir()">iPadAir</button>
+                <button id="btn-iPadmini" type="button" onclick="iPadmini()">iPadmini</button>
+            </div>
+            <div class="w-100"></div>
+            <div class="image col-md-6 col-sm-12">
+                <img id="product-img" src=" ">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div id="color">
+                </div>
+                <div id="text">
+                </div>
+                <div id="cash">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var products = {
+            iPad: {
+                group: {
+                    groupimg: "appleimg/ipad-hero.jpg"
+                },
+                col: [
+                    { color: "粉色" },
+                    { color: "銀色" },
+                    { color: "金色" }
+                ],
+                spe: [
+                    { standard: "64GB" },
+                    { standard: "128GB" },
+                    { standard: "256GB" }
+                ],
+            },
+            iPadAir: {
+                group: {
+                    groupimg: "appleimg/ipad-air.jpg"
+                },
+                col: [
+                    { color: "綠色" },
+                    { color: "黑色" },
+                    { color: "橘色" }
+                ],
+                spe: [
+                    { standard: "64GB" },
+                    { standard: "128GB" },
+                    { standard: "256GB" }
+                ],
+            },
+            iPadmini: {
+                group: {
+                    groupimg: "appleimg/ipad-mini.jpg"
+                },
+                col: [
+                    { color: "藍色" },
+                    { color: "紫色" },
+                ],
+                spe: [
+                    { standard: "64GB" },
+                    { standard: "128GB" },
+                    { standard: "256GB" }
+                ],
+            },
+        };
+        var productimg = document.getElementById("product-img");
+        var colors = document.getElementById("color");
+        var money = document.getElementById("text");
+        var cash = document.getElementById("cash");
+
+
+        function iPad() {
+            productimg.setAttribute('src', products.iPad.group.groupimg);
+            colors.innerHTML = "<h1>顏色</h1>";
+            money.innerHTML = "<h1>規格</h1>";
+            cash.innerHTML = "<h1>價錢</h1>";
+
+            var div = document.createElement("div");
+            colors.appendChild(div);
+            var divs = document.createElement("div");
+            money.appendChild(divs);
+
+            for (let item of products.iPad.col) {
+                let button = document.createElement("button");
+                let p = document.createElement("p");
+                div.appendChild(button);
+                p.innerHTML = item.color;
+                button.appendChild(p);
+                button.style.margin = "15px";
+            }
+
+            for (let items of products.iPad.spe) {
+                let button = document.createElement("button");
+                let p = document.createElement("p");
+                divs.appendChild(button);
+                p.innerHTML = items.standard;
+                button.appendChild(p);
+                button.style.margin = "15px";
+            }
+        }
+        function iPadAir() {
+            productimg.setAttribute('src', products.iPadAir.group.groupimg);
+            colors.innerHTML = "<h1>顏色</h1>";
+            money.innerHTML = "<h1>規格</h1>";
+            cash.innerHTML = "<h1>價錢</h1>";
+            var div = document.createElement("div");
+            colors.appendChild(div);
+            var divs = document.createElement("div");
+            money.appendChild(divs);
+
+            for (let item of products.iPadAir.col) {
+                let button = document.createElement("button");
+                let p = document.createElement("p");
+                div.appendChild(button);
+                p.innerHTML = item.color;
+                button.appendChild(p);
+                button.style.margin = "15px";
+            }
+
+            for (let items of products.iPadAir.spe) {
+                let button = document.createElement("button");
+                let p = document.createElement("p");
+                divs.appendChild(button);
+                p.innerHTML = items.standard;
+                button.appendChild(p);
+                button.style.margin = "15px";
+            }
+        }
+        function iPadmini() {
+            productimg.setAttribute('src', products.iPadmini.group.groupimg);
+            colors.innerHTML = "<h1>顏色</h1>";
+            money.innerHTML = "<h1>規格</h1>";
+            cash.innerHTML = "<h1>價錢</h1>";
+            var div = document.createElement("div");
+            colors.appendChild(div);
+            var divs = document.createElement("div");
+            money.appendChild(divs);
+
+            for (let item of products.iPadmini.col) {
+                let button = document.createElement("button");
+                let p = document.createElement("p");
+                div.appendChild(button);
+                p.innerHTML = item.color;
+                button.appendChild(p);
+                button.style.margin = "15px";
+            }
+
+            for (let items of products.iPadmini.spe) {
+                let button = document.createElement("button");
+                let p = document.createElement("p");
+                divs.appendChild(button);
+                p.innerHTML = items.standard;
+                button.appendChild(p);
+                button.style.margin = "15px";
+            }
+        }
+    </script>
+</body>
+
+
+</html>
