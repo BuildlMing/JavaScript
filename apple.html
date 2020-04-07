@@ -54,9 +54,14 @@
                     { color: "金色" }
                 ],
                 spe: [
-                    { standard: "64GB" },
-                    { standard: "128GB" },
-                    { standard: "256GB" }
+                    { standard: "64GB", man: "價錢:10000" },
+                    { standard: "128GB", man: "價錢:20000" },
+                    { standard: "256GB", man: "價錢:30000" }
+                ],
+                mon: [
+                    { man: "價錢:10000" },
+                    { man: "價錢:20000" },
+                    { man: "價錢:30000" }
                 ],
             },
             iPadAir: {
@@ -69,10 +74,11 @@
                     { color: "橘色" }
                 ],
                 spe: [
-                    { standard: "64GB" },
-                    { standard: "128GB" },
-                    { standard: "256GB" }
+                    { standard: "64GB", man: "價錢:10000" },
+                    { standard: "128GB", man: "價錢:20000" },
+                    { standard: "256GB", man: "價錢:30000" }
                 ],
+
             },
             iPadmini: {
                 group: {
@@ -83,9 +89,9 @@
                     { color: "紫色" },
                 ],
                 spe: [
-                    { standard: "64GB" },
-                    { standard: "128GB" },
-                    { standard: "256GB" }
+                    { standard: "64GB", man: "價錢:10000" },
+                    { standard: "128GB", man: "價錢:20000" },
+                    { standard: "256GB", man: "價錢:30000" }
                 ],
             },
         };
@@ -113,15 +119,29 @@
                 p.innerHTML = item.color;
                 button.appendChild(p);
                 button.style.margin = "15px";
+
+
             }
 
             for (let items of products.iPad.spe) {
-                let button = document.createElement("button");
+                let button1 = document.createElement("button");
+                button1.classList.add("color-btn");
+                button1.setAttribute("man", items.man);
                 let p = document.createElement("p");
-                divs.appendChild(button);
+                divs.appendChild(button1);
                 p.innerHTML = items.standard;
-                button.appendChild(p);
-                button.style.margin = "15px";
+                button1.appendChild(p);
+                button1.style.margin = "15px"
+            }
+            var priceDiv = document.createElement("h2");
+            cash.appendChild(priceDiv);
+
+
+            let storagebtns = document.getElementsByClassName("color-btn");
+            for (let a1 of storagebtns) {
+                a1.addEventListener("click", function () {
+                    priceDiv.innerHTML = a1.getAttributeNode("man").value;
+                });
             }
         }
         function iPadAir() {
@@ -144,12 +164,24 @@
             }
 
             for (let items of products.iPadAir.spe) {
-                let button = document.createElement("button");
+                let button1 = document.createElement("button");
+                button1.classList.add("color-btn");
+                button1.setAttribute("man", items.man);
                 let p = document.createElement("p");
-                divs.appendChild(button);
+                divs.appendChild(button1);
                 p.innerHTML = items.standard;
-                button.appendChild(p);
-                button.style.margin = "15px";
+                button1.appendChild(p);
+                button1.style.margin = "15px"
+            }
+            var priceDiv = document.createElement("h2");
+            cash.appendChild(priceDiv);
+
+
+            let storagebtns = document.getElementsByClassName("color-btn");
+            for (let a1 of storagebtns) {
+                a1.addEventListener("click", function () {
+                    priceDiv.innerHTML = a1.getAttributeNode("man").value;
+                });
             }
         }
         function iPadmini() {
@@ -170,14 +202,25 @@
                 button.appendChild(p);
                 button.style.margin = "15px";
             }
-
             for (let items of products.iPadmini.spe) {
-                let button = document.createElement("button");
+                let button1 = document.createElement("button");
+                button1.classList.add("color-btn");
+                button1.setAttribute("man", items.man);
                 let p = document.createElement("p");
-                divs.appendChild(button);
+                divs.appendChild(button1);
                 p.innerHTML = items.standard;
-                button.appendChild(p);
-                button.style.margin = "15px";
+                button1.appendChild(p);
+                button1.style.margin = "15px"
+            }
+            var priceDiv = document.createElement("h2");
+            cash.appendChild(priceDiv);
+
+
+            let storagebtns = document.getElementsByClassName("color-btn");
+            for (let a1 of storagebtns) {
+                a1.addEventListener("click", function () {
+                    priceDiv.innerHTML = a1.getAttributeNode("man").value;
+                });
             }
         }
     </script>
