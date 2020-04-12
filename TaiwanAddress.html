@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+
+    </table>
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+    <h1>台灣市區</h1>
+    <script>
+
+        window.onload = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                zipcodeArray = JSON.parse(this.responseText);
+
+                let ZipCode = [];
+                zipcodeArray.forEach((item, index) => {
+                    // zipCode.push({ CityName: "臺北市" });
+                    let _city = item.CityName;
+                    let _districts = [];
+                    item.AreaList.forEach((item, index) => {
+                        _districts.push({ District: item.AreaName, ZipCode: item.ZipCode });
+                    })
+                    
+                    let _cityObject = { city: _city, District: _districts };
+                    ZipCode.push(_cityObject);
+                })
+            }
+            xhr.open("GET", "http://127.0.0.1:5500/AjaxExamplesLite-master/Examples/TaiwanAddress/TaiwanAddress.json");
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
