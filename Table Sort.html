@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Apple</title>
+</head>
+
+<body>
+    <table class="table table-borderless">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
+    <script>
+        var iPad = [
+            {
+                "sku": "MW762",
+                "price": 10900,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 32GB - 金色",
+            },
+            {
+                "sku": "MW792",
+                "price": 13900,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 128GB - 金色",
+            },
+            {
+                "sku": "MW742",
+                "price": 10900,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 32GB - 太空灰色",
+            },
+            {
+                "sku": "MW772",
+                "price": 13900,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 128GB - 太空灰色",
+            },
+            {
+                "sku": "MW752",
+                "price": 10900,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 32GB - 銀色",
+            },
+            {
+                "sku": "MW782",
+                "price": 13900,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 128GB - 銀色",
+            },
+            {
+                "sku": "MW6D2",
+                "price": 15400,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 32GB - 金色",
+            },
+            {
+                "sku": "MW6G2",
+                "price": 18400,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 金色",
+            },
+            {
+                "sku": "MW6A2",
+                "price": 15400,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 32GB - 太空灰色",
+            },
+            {
+                "sku": "MW6E2",
+                "price": 18400,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 太空灰色",
+            },
+            {
+                "sku": "MW6C2",
+                "price": 15400,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 32GB - 銀色",
+            },
+            {
+                "sku": "MW6F2",
+                "price": 18400,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 銀色",
+            }
+        ];
+        var body = document.querySelector('body');
+        var table = document.querySelector('table');
+        var thead = document.createElement('thead');
+        var tbody = document.createElement('tbody');
+        var tr = document.querySelector('tr');
+
+        body.appendChild(table);
+        table.appendChild(tbody);
+        table.appendChild(thead);
+        thead.appendChild(tr);
+        sku();
+        price();
+        storage();
+        description();
+        addTbody();
+        function sku() {
+            for (item in iPad[0]) {
+                var th = document.querySelector('th');
+                if (item == "sku") {
+                    th.setAttribute("onclick", "OrderSku()");
+                    th.innerHTML = item;
+                    tr.appendChild(th);
+                }
+            }
+        }
+        function price() {
+            for (item in iPad[0]) {
+                var th = document.querySelector('th');
+                if (item == "price") {
+                    th.setAttribute("onclick", "OrderSku()");
+                    th.innerHTML = item;
+                    tr.appendChild(th);
+                }
+            }
+        }
+        function storage() {
+            for (item in iPad[0]) {
+                var th = document.querySelector('th');
+                if (item == "storage") {
+                    th.setAttribute("onclick", "OrderSku()");
+                    th.innerHTML = item;
+                    tr.appendChild(th);
+                }
+            }
+        }
+        function description() {
+            for (item in iPad[0]) {
+                var th = document.querySelector('th');
+                if (item == "description") {
+                    th.innerHTML = item;
+                    tr.appendChild(th);
+                }
+            }
+        }
+        
+        function addTbody() {
+            for (i = 0; i < iPad.length; i++) {
+                var tr = document.createElement('tr');
+                for (item in iPad[i]) {
+                    var td = document.createElement('td');
+                    td.innerHTML = iPad[i][item];
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+        }
+        var ClickSku = 0;
+        var ClickPrice = 0;
+        var ClickStorage = 0;
+        function OrderSku() {
+            if (ClickSku == 0) {
+                iPad = iPad.sort(function (a, b) {
+                    return a.sku < b.sku ? 1 : -1;
+                });
+                ClickSku = 1;
+            }
+            else {
+                iPad = iPad.sort(function (a, b) {
+                    return a.sku > b.sku ? 1 : -1;
+                });
+                ClickSku = 0;
+            }
+            tbody.innerHTML = '';
+            addTbody();
+        }
+        function OrderPrice() {
+            if (ClickPrice == 0) {
+                iPad = iPad.sort(function (a, b) {
+                    return a.price < b.price ? 1 : -1;
+                });
+                ClickPrice = 1;
+            }
+            else {
+                iPad = iPad.sort(function (a, b) {
+                    return a.price > b.price ? 1 : -1;
+                });
+                ClickPrice = 0;
+            }
+            tbody.innerHTML = '';
+            addTbody();
+        }
+        function OrderStorage() {
+            if (ClickStorage == 0) {
+                iPad = iPad.sort(function (a, b) {
+                    return a.storage < b.storage ? 1 : -1;
+                });
+                ClickStorage = 1;
+            }
+            else {
+                iPad = iPad.sort(function (a, b) {
+                    return a.storage > b.storage ? 1 : -1;
+                });
+                ClickStorage = 0;
+            }
+            tbody.innerHTML = '';
+            addTbody();
+        }
+    </script>
+</body>
+
+</html>
