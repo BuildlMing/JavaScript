@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 800px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+</head>
+
+<body>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var chu = { lat: 24.757324, lng: 120.952317 };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 10, center: chu });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: chu, map: map });
+            //圖片
+            var iconBase =
+                'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+            let Mask = '';
+            window.onload = function () {
+                let xhr = new XMLHttpRequest;
+                xhr.onload = function () {
+                    Mask = JSON.parse(this.responseText);
+
+                    Mask.forEach((item, index) => {
+                        var masksLeft = item.properties.masksLeft;
+                        var childMasksLeft = item.properties.childMasksLeft;
+                        if (masksLeft == 0 || childMasksLeft == 0) {
+                            var input = item.geometry.coordinates[0];
+                            var inputs = item.geometry.coordinates[1];
+                            var latitude = { lat: inputs, lng: input };
+                            var marker = new google.maps.Marker({
+                                position: latitude,
+                                icon: 'http://icons.iconarchive.com/icons/aha-soft/iron-man/16/Ironman-Mask-3-Old-icon.png',
+                                map: map
+                            });
+                        }
+                        else {
+                            var input = item.geometry.coordinates[0];
+                            var inputs = item.geometry.coordinates[1];
+                            var latitude = { lat: inputs, lng: input };
+                            var marker = new google.maps.Marker({
+                                position: latitude,
+                                // icon: 'http://icons.iconarchive.com/icons/aha-soft/iron-man/16/Ironman-Mask-3-Old-icon.png',
+                                map: map
+                            });
+                        }
+                    })
+                }
+                xhr.open("GET", "http://127.0.0.1:5500/googlemap/googlemap.json");
+                xhr.send();
+
+
+            }
+        }
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAyPNdKy9ntmptuJBHK3BBR0dWjW82VFM&callback=initMap">
+        </script>
+</body>
+
+</html>
