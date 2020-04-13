@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <h1>台灣市區</h1>
+    <template id="templateTitle">
+        <tr>
+            <th>縣市</th>
+            <th>區域</th>
+            <th>郵遞區號</th>
+        </tr>
+    </template>
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+    <script src="TaiwanAddress.js"></script>
+    <script>
+        let msg = $g("msg");
+        let table = $c("table");
+        let body = $g("body");
+        let thead = $c("thead");
+        let tboody = $c("tbody");
+
+        body.appendChild(table);
+        table.appendChild(thead);
+        table.appendChild(tboody);
+
+
+        window.onload = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                zipcodeArray = JSON.parse(this.responseText);
+
+                let ZipCode = [];
+                zipcodeArray.forEach((item, index) => {
+                    let _city = {
+                        CityName: item.CityName,
+                        AreaName: []
+                    };
+                    //  console.log(_city);
+                    // debugger;
+                    item.AreaList.forEach((items, index) => {
+                        let data = {
+                            Dis: items.AreaName,
+                            Zip: items.ZipCode
+                        };
+                        //  console.log(data);
+                        //  debugger;
+                        _city.AreaName.push(data);
+                    });
+                    ZipCode.push(_city);
+                });
+                // console.log(ZipCode);
+                // debugger;
+                addThead();
+                addTbody(Object.values(ZipCode));
+            }
+            xhr.open("GET", "http://127.0.0.1:5500/AjaxExamplesLite-master/Examples/TaiwanAddress/TaiwanAddress.json");
+            xhr.send();
+
+            function addThead() {
+                var thead = document.querySelector("thead");
+                let templateTitle = $g("#templateTitle");
+                let cloneContent =templateTitle.content.cloneNode(true);
+                thead.appendChild(cloneContent);
+            }
+
+            function addTbody(rowArray) {
+                let templateRow = $g("#templateRow");
+                let tr = $g("tr");
+                for (let i = 0; i < rowArray.length; i++) {
+                    for (let j = 0; j < rowArray[i].AreaName.length; j++) {
+                        let cloneContent =templateRow.content.cloneNode(true);
+                        let td = cloneContent.querySelectorAll('td');
+                        td[0].textContent = rowArray[i].CityName;
+                        td[1].textContent = rowArray[i].AreaName[j].Dis;
+                        td[2].textContent = rowArray[i].AreaName[j].Zip;
+                        tboody.appendChild(cloneContent);
+                    }
+                }
+                table.appendChild(tboody);
+            }
+        }
+    </script>
+</body>
+
+</html>
