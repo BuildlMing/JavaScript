@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>1A2B</h1>
+                <br>
+                <ul class="list-group list-group-horizontal">
+                    <a class="list-group-item" type="button" onclick="Start()">開始</a>
+                    <a class="list-group-item" type="button" onclick="RE()">放棄重來</a>
+                    <a class="list-group-item" type="button" onclick="Answer()">看答案</a>
+                </ul>
+                <ul id="guessResult" class="list-group"></ul>
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon1">猜答案</span>
+                    <input id="userGuess" type="text" name="" class="form-control" value="" required="required">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-link" onclick="Guess()">猜</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <SCript>
+        var guess = document.getElementById("guessResult");
+        var random = [];
+        function Start() {
+            random = [];
+            while (random.length < 4) {
+                var temp = Math.round(Math.random() * 9);
+                if (random.indexOf(temp) === -1) {
+                    random.push(temp);
+                }
+            }
+            alert("遊戲開始");
+            guess.innerHTML = null;
+        }
+        function RE() {
+            random = [];
+            while (random.length < 4) {
+                var temp = Math.round(Math.random() * 9);
+                if (random.indexOf(temp) === -1) {
+                    random.push(temp);
+                }
+            }
+            alert("遊戲重新");
+            guess.innerHTML = null;
+        }
+        function Guess() {
+            var ansA = 0, ansB = 0;
+            var user = document.getElementById("userGuess").value.toString();
+            var input = document.getElementById("userGuess");
+
+            if (random == null) {
+                alert("請先開始遊戲");
+                return;
+            }
+
+            if (user.length != 4) {
+                alert("輸入數字長度錯誤");
+                input.value = null;
+                return;
+            }
+
+            for (i = 0; i < 4; i++) {
+                if (random[i] != user[i]) {
+                    for (j = 0; j < 4; j++) {
+                        if (random[i] == user[j]) {
+                            ansB++;
+                        }
+                    }
+                }
+                else
+                    ansA++;
+            }
+
+            var li = document.createElement('li');
+            li.className = 'list-group-item';
+            var span = document.createElement('span');
+            span.innerText = `${ansA} A ${ansB} B`;
+            guess.appendChild(li);
+
+            if (ansA == 4) {
+                span.className = 'label label-success';
+            }
+            else {
+                span.className = 'label label-danger';
+            }
+            li.appendChild(span);
+            li.innerHTML += `答案 = ${user}`;
+            input.value = null;
+        }
+
+        function Answer() {
+            alert(`答案是 ： ${random}`);
+        }
+    </SCript>
+</body>
+
+</html>
