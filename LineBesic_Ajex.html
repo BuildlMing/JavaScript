@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <script>
+         $.ajax({
+            type:"get",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.json",
+            success:function(test){
+                var result =JSON.parse(test);
+                var ctx = document.getElementById("lineChart");
+                var chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: result.Label,
+                    datasets: [{
+                        label: result.City,
+                        data: result.Data,
+                        fill: false,
+                        backgroundColor: 'rgba(225,165,0,0.3)',
+                        borderColor: 'rgb(225,165,0)',
+                        pointStyle: "circle",
+                        pointBackgroundColor: 'rgb(0,255,0)',
+                        pointRadius: 5,
+                        pointHoverRadius: 10,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        fontSize: 26,
+                        text: '1-6月氣溫平均值'
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: true,
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'black',
+                        }
+                    }
+                }
+            })
+
+            },
+            error:function(){
+                alert('error');
+            }
+        });
+    </script>
+</body>
+
+</html>
